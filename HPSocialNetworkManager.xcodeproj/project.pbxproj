@@ -1,0 +1,402 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		75B28754166CCED100E2C3F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B28753166CCED100E2C3F1 /* UIKit.framework */; };
+		75B28756166CCED100E2C3F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B28755166CCED100E2C3F1 /* Foundation.framework */; };
+		75B28758166CCED100E2C3F1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B28757166CCED100E2C3F1 /* CoreGraphics.framework */; };
+		75B2875E166CCED100E2C3F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75B2875C166CCED100E2C3F1 /* InfoPlist.strings */; };
+		75B28760166CCED100E2C3F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2875F166CCED100E2C3F1 /* main.m */; };
+		75B28764166CCED100E2C3F1 /* HPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28763166CCED100E2C3F1 /* HPAppDelegate.m */; };
+		75B28766166CCED100E2C3F1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 75B28765166CCED100E2C3F1 /* Default.png */; };
+		75B28768166CCED100E2C3F1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75B28767166CCED100E2C3F1 /* Default@2x.png */; };
+		75B2876A166CCED100E2C3F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75B28769166CCED100E2C3F1 /* Default-568h@2x.png */; };
+		75B2876D166CCED100E2C3F1 /* HPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2876C166CCED100E2C3F1 /* HPViewController.m */; };
+		75B28770166CCED100E2C3F1 /* HPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B2876E166CCED100E2C3F1 /* HPViewController.xib */; };
+		75B2877C166CCF2000E2C3F1 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28779166CCF2000E2C3F1 /* TWAPIManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		75B2877D166CCF2000E2C3F1 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2877B166CCF2000E2C3F1 /* TWSignedRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		75B28782166CCF2A00E2C3F1 /* HPAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2877F166CCF2A00E2C3F1 /* HPAccount.m */; };
+		75B28783166CCF2A00E2C3F1 /* HPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28781166CCF2A00E2C3F1 /* HPAccountManager.m */; };
+		75B28798166CD3AF00E2C3F1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B28797166CD3AF00E2C3F1 /* FacebookSDK.framework */; };
+		75B2879F166CD4E400E2C3F1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B2879E166CD4E400E2C3F1 /* Social.framework */; };
+		75B287A1166CD50500E2C3F1 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A0166CD50500E2C3F1 /* Twitter.framework */; };
+		75B287A3166CD50A00E2C3F1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A2166CD50900E2C3F1 /* Accounts.framework */; };
+		75B287A5166CD51500E2C3F1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A4166CD51500E2C3F1 /* libsqlite3.0.dylib */; };
+		75B287A6166CD53100E2C3F1 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2878A166CD16000E2C3F1 /* OAuthCore.m */; };
+		75B287A7166CD53500E2C3F1 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28788166CD16000E2C3F1 /* OAuth+Additions.m */; };
+		75B287A9166CD55200E2C3F1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A8166CD55200E2C3F1 /* AdSupport.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		75B2874F166CCED100E2C3F1 /* HPSocialNetworkManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HPSocialNetworkManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75B28753166CCED100E2C3F1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		75B28755166CCED100E2C3F1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		75B28757166CCED100E2C3F1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		75B2875B166CCED100E2C3F1 /* HPSocialNetworkManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HPSocialNetworkManager-Info.plist"; sourceTree = "<group>"; };
+		75B2875D166CCED100E2C3F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		75B2875F166CCED100E2C3F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		75B28761166CCED100E2C3F1 /* HPSocialNetworkManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HPSocialNetworkManager-Prefix.pch"; sourceTree = "<group>"; };
+		75B28762166CCED100E2C3F1 /* HPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPAppDelegate.h; sourceTree = "<group>"; };
+		75B28763166CCED100E2C3F1 /* HPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPAppDelegate.m; sourceTree = "<group>"; };
+		75B28765166CCED100E2C3F1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		75B28767166CCED100E2C3F1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		75B28769166CCED100E2C3F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		75B2876B166CCED100E2C3F1 /* HPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPViewController.h; sourceTree = "<group>"; };
+		75B2876C166CCED100E2C3F1 /* HPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPViewController.m; sourceTree = "<group>"; };
+		75B2876F166CCED100E2C3F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HPViewController.xib; sourceTree = "<group>"; };
+		75B28778166CCF2000E2C3F1 /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAPIManager.h; sourceTree = "<group>"; };
+		75B28779166CCF2000E2C3F1 /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
+		75B2877A166CCF2000E2C3F1 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
+		75B2877B166CCF2000E2C3F1 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
+		75B2877E166CCF2A00E2C3F1 /* HPAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPAccount.h; sourceTree = "<group>"; };
+		75B2877F166CCF2A00E2C3F1 /* HPAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPAccount.m; sourceTree = "<group>"; };
+		75B28780166CCF2A00E2C3F1 /* HPAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPAccountManager.h; sourceTree = "<group>"; };
+		75B28781166CCF2A00E2C3F1 /* HPAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPAccountManager.m; sourceTree = "<group>"; };
+		75B28785166CD16000E2C3F1 /* NSData+Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Dependencies/OAuthCore/NSData+Base64.h"; sourceTree = "<group>"; };
+		75B28786166CD16000E2C3F1 /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Dependencies/OAuthCore/NSData+Base64.m"; sourceTree = "<group>"; };
+		75B28787166CD16000E2C3F1 /* OAuth+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "OAuth+Additions.h"; path = "Dependencies/OAuthCore/OAuth+Additions.h"; sourceTree = "<group>"; };
+		75B28788166CD16000E2C3F1 /* OAuth+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "OAuth+Additions.m"; path = "Dependencies/OAuthCore/OAuth+Additions.m"; sourceTree = "<group>"; };
+		75B28789166CD16000E2C3F1 /* OAuthCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OAuthCore.h; path = Dependencies/OAuthCore/OAuthCore.h; sourceTree = "<group>"; };
+		75B2878A166CD16000E2C3F1 /* OAuthCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OAuthCore.m; path = Dependencies/OAuthCore/OAuthCore.m; sourceTree = "<group>"; };
+		75B28797166CD3AF00E2C3F1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = HPSocialNetworkManager/Dependencies/FacebookSDK.framework; sourceTree = "<group>"; };
+		75B2879E166CD4E400E2C3F1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		75B287A0166CD50500E2C3F1 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		75B287A2166CD50900E2C3F1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		75B287A4166CD51500E2C3F1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		75B287A8166CD55200E2C3F1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		75B2874C166CCED100E2C3F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75B287A9166CD55200E2C3F1 /* AdSupport.framework in Frameworks */,
+				75B287A5166CD51500E2C3F1 /* libsqlite3.0.dylib in Frameworks */,
+				75B287A3166CD50A00E2C3F1 /* Accounts.framework in Frameworks */,
+				75B287A1166CD50500E2C3F1 /* Twitter.framework in Frameworks */,
+				75B2879F166CD4E400E2C3F1 /* Social.framework in Frameworks */,
+				75B28754166CCED100E2C3F1 /* UIKit.framework in Frameworks */,
+				75B28756166CCED100E2C3F1 /* Foundation.framework in Frameworks */,
+				75B28758166CCED100E2C3F1 /* CoreGraphics.framework in Frameworks */,
+				75B28798166CD3AF00E2C3F1 /* FacebookSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		75B28744166CCED100E2C3F1 = {
+			isa = PBXGroup;
+			children = (
+				75B28759166CCED100E2C3F1 /* HPSocialNetworkManager */,
+				75B28752166CCED100E2C3F1 /* Frameworks */,
+				75B28750166CCED100E2C3F1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75B28750166CCED100E2C3F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75B2874F166CCED100E2C3F1 /* HPSocialNetworkManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75B28752166CCED100E2C3F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75B287A8166CD55200E2C3F1 /* AdSupport.framework */,
+				75B287A2166CD50900E2C3F1 /* Accounts.framework */,
+				75B287A0166CD50500E2C3F1 /* Twitter.framework */,
+				75B2879E166CD4E400E2C3F1 /* Social.framework */,
+				75B287A4166CD51500E2C3F1 /* libsqlite3.0.dylib */,
+				75B28797166CD3AF00E2C3F1 /* FacebookSDK.framework */,
+				75B28753166CCED100E2C3F1 /* UIKit.framework */,
+				75B28755166CCED100E2C3F1 /* Foundation.framework */,
+				75B28757166CCED100E2C3F1 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75B28759166CCED100E2C3F1 /* HPSocialNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				75B28777166CCF0100E2C3F1 /* Dependencies */,
+				75B28776166CCEED00E2C3F1 /* Manager */,
+				75B28762166CCED100E2C3F1 /* HPAppDelegate.h */,
+				75B28763166CCED100E2C3F1 /* HPAppDelegate.m */,
+				75B2876B166CCED100E2C3F1 /* HPViewController.h */,
+				75B2876C166CCED100E2C3F1 /* HPViewController.m */,
+				75B2876E166CCED100E2C3F1 /* HPViewController.xib */,
+				75B2875A166CCED100E2C3F1 /* Supporting Files */,
+			);
+			path = HPSocialNetworkManager;
+			sourceTree = "<group>";
+		};
+		75B2875A166CCED100E2C3F1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				75B2875B166CCED100E2C3F1 /* HPSocialNetworkManager-Info.plist */,
+				75B2875C166CCED100E2C3F1 /* InfoPlist.strings */,
+				75B2875F166CCED100E2C3F1 /* main.m */,
+				75B28761166CCED100E2C3F1 /* HPSocialNetworkManager-Prefix.pch */,
+				75B28765166CCED100E2C3F1 /* Default.png */,
+				75B28767166CCED100E2C3F1 /* Default@2x.png */,
+				75B28769166CCED100E2C3F1 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		75B28776166CCEED00E2C3F1 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				75B2877E166CCF2A00E2C3F1 /* HPAccount.h */,
+				75B2877F166CCF2A00E2C3F1 /* HPAccount.m */,
+				75B28780166CCF2A00E2C3F1 /* HPAccountManager.h */,
+				75B28781166CCF2A00E2C3F1 /* HPAccountManager.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		75B28777166CCF0100E2C3F1 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				75B28784166CD13F00E2C3F1 /* OAuthCore */,
+				75B2878B166CD1C800E2C3F1 /* TWAPIManager */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		75B28784166CD13F00E2C3F1 /* OAuthCore */ = {
+			isa = PBXGroup;
+			children = (
+				75B28785166CD16000E2C3F1 /* NSData+Base64.h */,
+				75B28786166CD16000E2C3F1 /* NSData+Base64.m */,
+				75B28787166CD16000E2C3F1 /* OAuth+Additions.h */,
+				75B28788166CD16000E2C3F1 /* OAuth+Additions.m */,
+				75B28789166CD16000E2C3F1 /* OAuthCore.h */,
+				75B2878A166CD16000E2C3F1 /* OAuthCore.m */,
+			);
+			name = OAuthCore;
+			sourceTree = "<group>";
+		};
+		75B2878B166CD1C800E2C3F1 /* TWAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				75B28778166CCF2000E2C3F1 /* TWAPIManager.h */,
+				75B28779166CCF2000E2C3F1 /* TWAPIManager.m */,
+				75B2877A166CCF2000E2C3F1 /* TWSignedRequest.h */,
+				75B2877B166CCF2000E2C3F1 /* TWSignedRequest.m */,
+			);
+			name = TWAPIManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		75B2874E166CCED100E2C3F1 /* HPSocialNetworkManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75B28773166CCED100E2C3F1 /* Build configuration list for PBXNativeTarget "HPSocialNetworkManager" */;
+			buildPhases = (
+				75B2874B166CCED100E2C3F1 /* Sources */,
+				75B2874C166CCED100E2C3F1 /* Frameworks */,
+				75B2874D166CCED100E2C3F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HPSocialNetworkManager;
+			productName = HPSocialNetworkManager;
+			productReference = 75B2874F166CCED100E2C3F1 /* HPSocialNetworkManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		75B28746166CCED100E2C3F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HP;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Hipo;
+			};
+			buildConfigurationList = 75B28749166CCED100E2C3F1 /* Build configuration list for PBXProject "HPSocialNetworkManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 75B28744166CCED100E2C3F1;
+			productRefGroup = 75B28750166CCED100E2C3F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75B2874E166CCED100E2C3F1 /* HPSocialNetworkManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75B2874D166CCED100E2C3F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75B2875E166CCED100E2C3F1 /* InfoPlist.strings in Resources */,
+				75B28766166CCED100E2C3F1 /* Default.png in Resources */,
+				75B28768166CCED100E2C3F1 /* Default@2x.png in Resources */,
+				75B2876A166CCED100E2C3F1 /* Default-568h@2x.png in Resources */,
+				75B28770166CCED100E2C3F1 /* HPViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75B2874B166CCED100E2C3F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75B28760166CCED100E2C3F1 /* main.m in Sources */,
+				75B28764166CCED100E2C3F1 /* HPAppDelegate.m in Sources */,
+				75B2876D166CCED100E2C3F1 /* HPViewController.m in Sources */,
+				75B2877C166CCF2000E2C3F1 /* TWAPIManager.m in Sources */,
+				75B2877D166CCF2000E2C3F1 /* TWSignedRequest.m in Sources */,
+				75B28782166CCF2A00E2C3F1 /* HPAccount.m in Sources */,
+				75B287A7166CD53500E2C3F1 /* OAuth+Additions.m in Sources */,
+				75B287A6166CD53100E2C3F1 /* OAuthCore.m in Sources */,
+				75B28783166CCF2A00E2C3F1 /* HPAccountManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		75B2875C166CCED100E2C3F1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75B2875D166CCED100E2C3F1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		75B2876E166CCED100E2C3F1 /* HPViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75B2876F166CCED100E2C3F1 /* en */,
+			);
+			name = HPViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		75B28771166CCED100E2C3F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		75B28772166CCED100E2C3F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		75B28774166CCED100E2C3F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/HPSocialNetworkManager/Dependencies\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HPSocialNetworkManager/HPSocialNetworkManager-Prefix.pch";
+				INFOPLIST_FILE = "HPSocialNetworkManager/HPSocialNetworkManager-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		75B28775166CCED100E2C3F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/HPSocialNetworkManager/Dependencies\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HPSocialNetworkManager/HPSocialNetworkManager-Prefix.pch";
+				INFOPLIST_FILE = "HPSocialNetworkManager/HPSocialNetworkManager-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75B28749166CCED100E2C3F1 /* Build configuration list for PBXProject "HPSocialNetworkManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75B28771166CCED100E2C3F1 /* Debug */,
+				75B28772166CCED100E2C3F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75B28773166CCED100E2C3F1 /* Build configuration list for PBXNativeTarget "HPSocialNetworkManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75B28774166CCED100E2C3F1 /* Debug */,
+				75B28775166CCED100E2C3F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 75B28746166CCED100E2C3F1 /* Project object */;
+}
