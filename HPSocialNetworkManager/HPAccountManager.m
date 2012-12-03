@@ -79,14 +79,14 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
         /*
         if ([STUser hasAuthenticatedUser]) {
             STAccount *facebookAccount = [[STUser authenticatedUser]
-                                          connectedAccountOfType:HPAccountTypeFacebook];
+                                          connectedAccountOfType:STAccountTypeFacebook];
             
-            if (facebookAccount != nil && [self hasAuthenticatedAccountOfType:HPAccountTypeFacebook]) {
+            if (facebookAccount != nil && [self hasAuthenticatedAccountOfType:STAccountTypeFacebook]) {
                 [self authenticateFacebookAccount];
             }
 
             STAccount *twitterAccount = [[STUser authenticatedUser]
-                                         connectedAccountOfType:HPAccountTypeTwitter];
+                                         connectedAccountOfType:STAccountTypeTwitter];
             
             if (twitterAccount != nil && self.twitterToken != nil && self.twitterTokenSecret != nil) {
                 [self checkSystemTwitterAccountsAgainstAccount:twitterAccount];
@@ -289,7 +289,7 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
         
         /*
         STAccount *twitterAccount = [[STUser authenticatedUser]
-                                     connectedAccountOfType:HPAccountTypeTwitter];
+                                     connectedAccountOfType:STAccountTypeTwitter];
         NSLog(@"EXISTING ACCOUNT: %@", twitterAccount);
          */
         //[self checkSystemTwitterAccountsAgainstAccount:twitterAccount];
