@@ -13,11 +13,11 @@
 #import "HPAppDelegate.h"
 
 
-static NSString * const STAccountManagerErrorDomain = @"com.hipo.HPSocialNetworkManager.authError";
-static NSString * const STAccountManagerTwitterVerifyURL = @"http://api.twitter.com/1/account/verify_credentials.json";
-static NSString * const STAccountManagerTwitterTokenKey = @"twitterToken";
-static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
-static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
+static NSString * const HPAccountManagerErrorDomain = @"com.hipo.HPSocialNetworkManager.authError";
+static NSString * const HPAccountManagerTwitterVerifyURL = @"http://api.twitter.com/1/account/verify_credentials.json";
+static NSString * const HPAccountManagerTwitterTokenKey = @"twitterToken";
+static NSString * const HPAccountManagerTwitterSecretKey = @"twitterSecret";
+static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 
 
 @interface HPAccountManager (Private)
@@ -147,7 +147,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 - (void)authenticateAccountOfType:(HPAccountType)accountType
                       withHandler:(HPAccountAuthHandler)handler {
     if (accountType == HPAccountTypeUnknown) {
-        handler(nil, nil, [NSError errorWithDomain:STAccountManagerErrorDomain
+        handler(nil, nil, [NSError errorWithDomain:HPAccountManagerErrorDomain
                                               code:HPAccountManagerErrorUnknownServiceType
                                           userInfo:nil]);
         
@@ -155,7 +155,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
     }
     
     if (_authHandler != nil) {
-        handler(nil, nil, [NSError errorWithDomain:STAccountManagerErrorDomain
+        handler(nil, nil, [NSError errorWithDomain:HPAccountManagerErrorDomain
                                               code:HPAccountManagerErrorAuthenticationInProcess
                                           userInfo:nil]);
         
@@ -462,9 +462,9 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
                                           
                                           NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
                                           NSLog(@">>> STORING TOKEN: %@ / SECRET: %@ / USERNAME: %@", token, tokenSecret, twitterAccount.username);
-                                          [prefs setObject:token forKey:STAccountManagerTwitterTokenKey];
-                                          [prefs setObject:tokenSecret forKey:STAccountManagerTwitterSecretKey];
-                                          [prefs setObject:twitterAccount.username forKey:STAccountManagerTwitterUsernameKey];
+                                          [prefs setObject:token forKey:HPAccountManagerTwitterTokenKey];
+                                          [prefs setObject:tokenSecret forKey:HPAccountManagerTwitterSecretKey];
+                                          [prefs setObject:twitterAccount.username forKey:HPAccountManagerTwitterUsernameKey];
                                           [prefs synchronize];
 
                                           [self fetchDetailsForTwitterAccount:twitterAccount];
@@ -472,7 +472,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 }
 
 - (void)fetchDetailsForTwitterAccount:(ACAccount *)twitterAccount {
-    TWRequest *request = [[TWRequest alloc] initWithURL:[NSURL URLWithString:STAccountManagerTwitterVerifyURL]
+    TWRequest *request = [[TWRequest alloc] initWithURL:[NSURL URLWithString:HPAccountManagerTwitterVerifyURL]
                                              parameters:nil
                                           requestMethod:TWRequestMethodGET];
 
@@ -539,7 +539,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
                 break;
             }
             default: {
-                _authHandler(account, profileInfo, [NSError errorWithDomain:STAccountManagerErrorDomain
+                _authHandler(account, profileInfo, [NSError errorWithDomain:HPAccountManagerErrorDomain
                                                                        code:error
                                                                    userInfo:nil]);
                 break;
@@ -575,21 +575,36 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 #pragma mark - Twitter Tokens
 
 - (NSString *)twitterToken {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:STAccountManagerTwitterTokenKey];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:HPAccountManagerTwitterTokenKey];
 }
 
 - (NSString *)twitterTokenSecret {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:STAccountManagerTwitterSecretKey];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:HPAccountManagerTwitterSecretKey];
 }
 
 - (NSString *)twitterUsername {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:STAccountManagerTwitterUsernameKey];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:HPAccountManagerTwitterUsernameKey];
 }
 
 #pragma mark - Facebook Token
 
 - (NSString *)facebookToken {
     return [[FBSession activeSession] accessToken];
+}
+
+#pragma mark - Reset
+
+- (void)resetCachedTokens {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    [prefs removeObjectForKey:HPAccountManagerTwitterTokenKey];
+    [prefs removeObjectForKey:HPAccountManagerTwitterSecretKey];
+    [prefs removeObjectForKey:HPAccountManagerTwitterUsernameKey];
+    [prefs synchronize];
+    
+    [[FBSession activeSession] closeAndClearTokenInformation];
+    
+    [_twitterAccount release], _twitterAccount = nil;
 }
 
 @end

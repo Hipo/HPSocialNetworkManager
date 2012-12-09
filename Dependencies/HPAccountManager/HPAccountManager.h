@@ -59,4 +59,6 @@ typedef enum {
 
 - (BOOL)handleOpenURL:(NSURL *)url;
 
+- (void)resetCachedTokens;
+
 @end
