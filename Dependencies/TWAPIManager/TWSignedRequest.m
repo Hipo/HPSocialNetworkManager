@@ -85,8 +85,7 @@
      ^(id key, id obj, BOOL *stop) {
          [paramsAsString appendFormat:@"%@=%@&", key, obj];
      }];
-    NSLog(@"PARAMS: %@", paramsAsString);
-    NSLog(@"URL: %@", [_url absoluteString]);
+
     //  Create the authorization header and attach to our request
     NSData *bodyData = [paramsAsString dataUsingEncoding:NSUTF8StringEncoding];
     NSString *authorizationHeader = OAuthorizationHeader(_url,

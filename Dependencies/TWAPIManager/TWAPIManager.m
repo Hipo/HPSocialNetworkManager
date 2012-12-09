@@ -110,7 +110,7 @@ typedef void(^TWAPIHandler)(NSData *data, NSError *error);
         else {
             NSString *signedReverseAuthSignature =
             [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"SIGNED SIGNATURE: %@", signedReverseAuthSignature);
+
             [self _step2WithAccount:account
                           signature:signedReverseAuthSignature
                          andHandler:^(NSData *responseData, NSError *error) {

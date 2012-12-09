@@ -367,7 +367,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
                     _twitterAccount = [systemTwitterAccount retain];
                     
                     if (_authHandler != nil) {
-                        NSString *accountID = [[systemTwitterAccount valueForKeyPath:@"properties.user_id"] stringValue];
+                        NSString *accountID = [systemTwitterAccount valueForKeyPath:@"properties.user_id"];
                         HPAccount *account = [HPAccount accountWithType:HPAccountTypeTwitter
                                                              identifier:accountID];
                         
