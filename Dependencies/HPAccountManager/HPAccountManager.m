@@ -278,13 +278,11 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
                                                           return;
                                                       }
                                                       
-                                                      //[FBSession setActiveSession:_facebookSession];
-                                                      
                                                       [self fetchDetailsForFacebookAccount];
                                                   }];
     
     if (authenticated) {
-        NSLog(@">>> AUTHENTICATED");
+        [self fetchDetailsForFacebookAccount];
     }
 }
 
