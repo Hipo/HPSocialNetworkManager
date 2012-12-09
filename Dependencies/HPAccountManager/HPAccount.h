@@ -3,7 +3,7 @@
 //  HPSocialNetworkManager
 //
 //  Created by Taylan Pince on 2012-11-28.
-//  Copyright (c) 2012 Strum. All rights reserved.
+//  Copyright (c) 2012 Hipo. All rights reserved.
 //
 
 typedef enum {
