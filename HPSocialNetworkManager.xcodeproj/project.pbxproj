@@ -23,13 +23,14 @@
 		75B28782166CCF2A00E2C3F1 /* HPAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2877F166CCF2A00E2C3F1 /* HPAccount.m */; };
 		75B28783166CCF2A00E2C3F1 /* HPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28781166CCF2A00E2C3F1 /* HPAccountManager.m */; };
 		75B28798166CD3AF00E2C3F1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B28797166CD3AF00E2C3F1 /* FacebookSDK.framework */; };
-		75B2879F166CD4E400E2C3F1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B2879E166CD4E400E2C3F1 /* Social.framework */; };
+		75B2879F166CD4E400E2C3F1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B2879E166CD4E400E2C3F1 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		75B287A1166CD50500E2C3F1 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A0166CD50500E2C3F1 /* Twitter.framework */; };
-		75B287A3166CD50A00E2C3F1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A2166CD50900E2C3F1 /* Accounts.framework */; };
+		75B287A3166CD50A00E2C3F1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A2166CD50900E2C3F1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		75B287A5166CD51500E2C3F1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A4166CD51500E2C3F1 /* libsqlite3.0.dylib */; };
 		75B287A6166CD53100E2C3F1 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2878A166CD16000E2C3F1 /* OAuthCore.m */; };
 		75B287A7166CD53500E2C3F1 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28788166CD16000E2C3F1 /* OAuth+Additions.m */; };
-		75B287A9166CD55200E2C3F1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A8166CD55200E2C3F1 /* AdSupport.framework */; };
+		75B287A9166CD55200E2C3F1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A8166CD55200E2C3F1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ECF83AF6167408C800CB5A5A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B28786166CD16000E2C3F1 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -273,6 +274,7 @@
 				75B287A7166CD53500E2C3F1 /* OAuth+Additions.m in Sources */,
 				75B287A6166CD53100E2C3F1 /* OAuthCore.m in Sources */,
 				75B28783166CCF2A00E2C3F1 /* HPAccountManager.m in Sources */,
+				ECF83AF6167408C800CB5A5A /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +323,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -341,6 +347,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -395,6 +405,7 @@
 				75B28775166CCED100E2C3F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

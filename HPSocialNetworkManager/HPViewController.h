@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Hipo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 @interface HPViewController : UIViewController
 

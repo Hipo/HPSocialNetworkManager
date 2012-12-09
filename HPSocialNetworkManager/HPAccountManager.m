@@ -1,25 +1,23 @@
 //
-//  STAccountManager.m
-//  Strum
+//  HPAccountManager.m
+//  HPSocialNetworkManager
 //
 //  Created by Taylan Pince on 2012-11-28.
 //  Copyright (c) 2012 Strum. All rights reserved.
 //
 
 #import "TWAPIManager.h"
+#import "NSData+Base64.h"
 
 #import "HPAccountManager.h"
 #import "HPAppDelegate.h"
-//#import "STUser.h"
 
 
-static NSString * const STFacebookAppID = @"303313163103377";
-static NSString * const STTwitterConsumerKey = @"add9vW4qKN25vjDvmIDA";
-static NSString * const STTwitterConsumerSecret = @"YaKWEsR03v6xP81dV53NXLRdKKEyKdahLazGgaqWKQ";
-static NSString * const STAccountManagerErrorDomain = @"com.strum.Strum.authError";
+static NSString * const STAccountManagerErrorDomain = @"com.hipo.HPSocialNetworkManager.authError";
 static NSString * const STAccountManagerTwitterVerifyURL = @"http://api.twitter.com/1/account/verify_credentials.json";
 static NSString * const STAccountManagerTwitterTokenKey = @"twitterToken";
 static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
+static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 
 
 @interface HPAccountManager (Private)
@@ -27,7 +25,7 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
 - (void)authenticateFacebookAccount;
 - (void)authenticateTwitterAccount;
 
-- (void)checkSystemTwitterAccountsAgainstAccount:(HPAccount *)account;
+- (void)checkSystemTwitterAccountsAgainstUsername:(NSString *)username;
 - (void)generateTokenForTwitterAccount:(ACAccount *)twitterAccount;
 - (void)fetchDetailsForTwitterAccount:(ACAccount *)twitterAccount;
 - (void)fetchDetailsForFacebookAccount;
@@ -59,41 +57,6 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
     self = [super init];
     
     if (self) {
-        [FBSession setDefaultAppID:STFacebookAppID];
-        
-        _authHandler = nil;
-        _accountStore = [[ACAccountStore alloc] init];
-
-        _facebookSession = [[FBSession alloc] initWithAppID:STFacebookAppID
-                                                permissions:@[@"email", @"user_location",
-                                                                @"publish_stream", @"user_about_me"]
-                                            defaultAudience:FBSessionDefaultAudienceNone
-                                            urlSchemeSuffix:nil
-                                         tokenCacheStrategy:nil];
-        
-        _twitterManager = [[TWAPIManager alloc] init];
-        
-        [_twitterManager setConsumerKey:STTwitterConsumerKey];
-        [_twitterManager setConsumerSecret:STTwitterConsumerSecret];
-
-        /*
-        if ([STUser hasAuthenticatedUser]) {
-            STAccount *facebookAccount = [[STUser authenticatedUser]
-                                          connectedAccountOfType:STAccountTypeFacebook];
-            
-            if (facebookAccount != nil && [self hasAuthenticatedAccountOfType:STAccountTypeFacebook]) {
-                [self authenticateFacebookAccount];
-            }
-
-            STAccount *twitterAccount = [[STUser authenticatedUser]
-                                         connectedAccountOfType:STAccountTypeTwitter];
-            
-            if (twitterAccount != nil && self.twitterToken != nil && self.twitterTokenSecret != nil) {
-                [self checkSystemTwitterAccountsAgainstAccount:twitterAccount];
-            }
-        }
-        */
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveApplicationWillTerminateNotification:)
                                                      name:UIApplicationWillTerminateNotification
@@ -109,6 +72,8 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [_facebookSession release], _facebookSession = nil;
     [_authHandler release], _authHandler = nil;
     [_twitterAccount release], _twitterAccount = nil;
@@ -120,8 +85,38 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
 
 #pragma mark - Setup
 
-- (void)setupWithLaunchOptions:(NSDictionary *)launchOptions {
+- (void)setupWithFacebookAppID:(NSString *)facebookAppID
+        facebookAppPermissions:(NSArray *)facebookAppPermissions
+            twitterConsumerKey:(NSString *)twitterConsumerKey
+         twitterConsumerSecret:(NSString *)twitterConsumerSecret {
     
+    if (_facebookSession != nil || _twitterManager != nil) {
+        return;
+    }
+    
+    [FBSession setDefaultAppID:facebookAppID];
+    
+    _authHandler = nil;
+    _accountStore = [[ACAccountStore alloc] init];
+    
+    _facebookSession = [[FBSession alloc] initWithAppID:facebookAppID
+                                            permissions:facebookAppPermissions
+                                        defaultAudience:FBSessionDefaultAudienceNone
+                                        urlSchemeSuffix:nil
+                                     tokenCacheStrategy:nil];
+    
+    _twitterManager = [[TWAPIManager alloc] init];
+    
+    [_twitterManager setConsumerKey:twitterConsumerKey];
+    [_twitterManager setConsumerSecret:twitterConsumerSecret];
+    
+    if ([self hasAuthenticatedAccountOfType:HPAccountTypeFacebook]) {
+        [self authenticateFacebookAccount];
+    }
+    
+    if (self.twitterToken != nil && self.twitterTokenSecret != nil && self.twitterUsername != nil) {
+        [self checkSystemTwitterAccountsAgainstUsername:self.twitterUsername];
+    }
 }
 
 #pragma mark - Authentication check
@@ -269,14 +264,6 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
     ACAccountType *twitterAccountType = [_accountStore accountTypeWithAccountTypeIdentifier:
                                          ACAccountTypeIdentifierTwitter];
     
-    if ([[_accountStore accountsWithAccountType:twitterAccountType] count] == 0) {
-        [self completeAuthProcessWithAccount:nil
-                                 profileInfo:nil
-                                       error:HPAccountManagerErrorNoAccountFound];
-        
-        return;
-    }
-    
     ACAccountStoreRequestAccessCompletionHandler completionHandler = ^(BOOL granted, NSError *error) {
         if (!granted || error != nil) {
             NSLog(@"ACCESS REQUEST FAIL: %@", error);
@@ -286,13 +273,8 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
             
             return;
         }
-        
-        /*
-        STAccount *twitterAccount = [[STUser authenticatedUser]
-                                     connectedAccountOfType:STAccountTypeTwitter];
-        NSLog(@"EXISTING ACCOUNT: %@", twitterAccount);
-         */
-        //[self checkSystemTwitterAccountsAgainstAccount:twitterAccount];
+        NSLog(@">>> CHECKING: %@", self.twitterUsername);
+        [self checkSystemTwitterAccountsAgainstUsername:self.twitterUsername];
     };
     
     if ([_accountStore respondsToSelector:@selector(requestAccessToAccountsWithType:options:completion:)]) {
@@ -305,7 +287,7 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
     }
 }
 
-- (void)checkSystemTwitterAccountsAgainstAccount:(HPAccount *)account {
+- (void)checkSystemTwitterAccountsAgainstUsername:(NSString *)username {
     ACAccountType *twitterAccountType = [_accountStore accountTypeWithAccountTypeIdentifier:
                                          ACAccountTypeIdentifierTwitter];
     
@@ -321,17 +303,19 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
         return;
     }
     
-    if (account != nil) {
-        NSLog(@">>> LOOKING FOR %@", account.identifier);
+    if (username != nil) {
+        NSLog(@">>> LOOKING FOR %@", username);
         for (ACAccount *systemTwitterAccount in systemTwitterAccounts) {
             NSLog(@">>> CHECKING ACCOUNT: %@", systemTwitterAccount);
             if (systemTwitterAccount.username != nil) {
-                NSString *accountID = [[systemTwitterAccount valueForKeyPath:@"properties.user_id"] stringValue];
-                NSLog(@"ACCOUNT ID: %@", accountID);
-                if ([accountID isEqualToString:account.identifier]) {
+                if ([username isEqualToString:systemTwitterAccount.username]) {
                     _twitterAccount = [systemTwitterAccount retain];
                     
                     if (_authHandler != nil) {
+                        NSString *accountID = [[systemTwitterAccount valueForKeyPath:@"properties.user_id"] stringValue];
+                        HPAccount *account = [HPAccount accountWithType:HPAccountTypeTwitter
+                                                             identifier:accountID];
+                        
                         [self completeAuthProcessWithAccount:account
                                                  profileInfo:nil
                                                        error:HPAccountManagerErrorNone];
@@ -404,6 +388,8 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
                                               }
                                           }
                                           
+                                          [response release];
+                                          
                                           if (token == nil || tokenSecret == nil) {
                                               [self completeAuthProcessWithAccount:nil
                                                                        profileInfo:nil
@@ -413,9 +399,10 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
                                           }
                                           
                                           NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-                                          NSLog(@">>> STORING TOKEN: %@ / SECRET: %@", token, tokenSecret);
+                                          NSLog(@">>> STORING TOKEN: %@ / SECRET: %@ / USERNAME: %@", token, tokenSecret, twitterAccount.username);
                                           [prefs setObject:token forKey:STAccountManagerTwitterTokenKey];
                                           [prefs setObject:tokenSecret forKey:STAccountManagerTwitterSecretKey];
+                                          [prefs setObject:twitterAccount.username forKey:STAccountManagerTwitterUsernameKey];
                                           [prefs synchronize];
 
                                           [self fetchDetailsForTwitterAccount:twitterAccount];
@@ -531,6 +518,10 @@ static NSString * const STAccountManagerTwitterSecretKey = @"twitterSecret";
 
 - (NSString *)twitterTokenSecret {
     return [[NSUserDefaults standardUserDefaults] objectForKey:STAccountManagerTwitterSecretKey];
+}
+
+- (NSString *)twitterUsername {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:STAccountManagerTwitterUsernameKey];
 }
 
 #pragma mark - Facebook Token

@@ -1,6 +1,6 @@
 //
-//  STAccountManager.h
-//  Strum
+//  HPAccountManager.h
+//  HPSocialNetworkManager
 //
 //  Created by Taylan Pince on 2012-11-28.
 //  Copyright (c) 2012 Strum. All rights reserved.
@@ -38,13 +38,17 @@ typedef enum {
     HPAccountAuthHandler _authHandler;
 }
 
+@property (nonatomic, readonly) NSString *twitterUsername;
 @property (nonatomic, readonly) NSString *twitterToken;
 @property (nonatomic, readonly) NSString *twitterTokenSecret;
 @property (nonatomic, readonly) NSString *facebookToken;
 
 + (HPAccountManager *)sharedManager;
 
-- (void)setupWithLaunchOptions:(NSDictionary *)launchOptions;
+- (void)setupWithFacebookAppID:(NSString *)facebookAppID
+        facebookAppPermissions:(NSArray *)facebookAppPermissions
+            twitterConsumerKey:(NSString *)twitterConsumerKey
+         twitterConsumerSecret:(NSString *)twitterConsumerSecret;
 
 - (BOOL)hasAuthenticatedAccountOfType:(HPAccountType)accountType;
 

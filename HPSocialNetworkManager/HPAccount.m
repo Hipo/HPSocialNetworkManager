@@ -1,6 +1,6 @@
 //
-//  STAccount.m
-//  Strum
+//  HPAccount.m
+//  HPSocialNetworkManager
 //
 //  Created by Taylan Pince on 2012-11-28.
 //  Copyright (c) 2012 Strum. All rights reserved.
