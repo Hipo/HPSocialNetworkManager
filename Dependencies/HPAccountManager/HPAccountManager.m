@@ -76,7 +76,6 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [_facebookSession release], _facebookSession = nil;
     [_authHandler release], _authHandler = nil;
     [_twitterAccount release], _twitterAccount = nil;
     [_accountStore release], _accountStore = nil;
@@ -94,7 +93,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
             twitterConsumerKey:(NSString *)twitterConsumerKey
          twitterConsumerSecret:(NSString *)twitterConsumerSecret {
     
-    if (_facebookSession != nil || _twitterManager != nil) {
+    if (_facebookAppID != nil || _twitterManager != nil) {
         return;
     }
     
@@ -105,13 +104,6 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
     
     _authHandler = nil;
     _accountStore = [[ACAccountStore alloc] init];
-    
-    _facebookSession = [[FBSession alloc] initWithAppID:_facebookAppID
-                                            permissions:_facebookPermissions
-                                        defaultAudience:FBSessionDefaultAudienceNone
-                                        urlSchemeSuffix:nil
-                                     tokenCacheStrategy:nil];
-    
     _twitterManager = [[TWAPIManager alloc] init];
     
     [_twitterManager setConsumerKey:twitterConsumerKey];
@@ -131,9 +123,11 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 - (BOOL)hasAuthenticatedAccountOfType:(HPAccountType)accountType {
     switch (accountType) {
         case HPAccountTypeFacebook: {
-            return (_facebookSession.state == FBSessionStateCreatedTokenLoaded ||
-                    _facebookSession.state == FBSessionStateOpen ||
-                    _facebookSession.state == FBSessionStateOpenTokenExtended);
+            FBSessionState sessionState = [[FBSession activeSession] state];
+
+            return (sessionState == FBSessionStateCreatedTokenLoaded ||
+                    sessionState == FBSessionStateOpen ||
+                    sessionState == FBSessionStateOpenTokenExtended);
             break;
         }
         case HPAccountTypeTwitter: {
@@ -189,7 +183,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 #pragma mark - Facebook login
 
 - (void)authenticateFacebookAccount {
-    if ([_facebookSession isOpen] && [self hasAuthenticatedAccountOfType:HPAccountTypeFacebook]) {
+    if ([[FBSession activeSession] isOpen] && [self hasAuthenticatedAccountOfType:HPAccountTypeFacebook]) {
         NSLog(@">>> SESSION ALREADY OPEN");
         [self fetchDetailsForFacebookAccount];
         
@@ -199,13 +193,16 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
     ACAccountStoreRequestAccessCompletionHandler completionHandler = ^(BOOL granted, NSError *error) {
         if (!granted || error != nil) {
             NSLog(@"ACCESS REQUEST FAIL: %@", error);
-            [self completeAuthProcessWithAccount:nil
-                                     profileInfo:nil
-                                           error:HPAccountManagerErrorAuthenticationFailed];
+            if ([error code] != ACErrorAccountNotFound) {
+                NSLog(@"BAIL");
+                [self completeAuthProcessWithAccount:nil
+                                         profileInfo:nil
+                                               error:HPAccountManagerErrorAuthenticationFailed];
             
-            return;
+                return;
+            }
         }
-        NSLog(@">>> ACCESS REQUEST GRANTED");
+
         dispatch_block_t completionBlock = ^{
             [self openFacebookSession];
         };
@@ -220,12 +217,12 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
     if ([_accountStore respondsToSelector:@selector(requestAccessToAccountsWithType:options:completion:)]) {
         ACAccountType *facebookAccountType = [_accountStore accountTypeWithAccountTypeIdentifier:
                                               ACAccountTypeIdentifierFacebook];
-        
+
         [_accountStore requestAccessToAccountsWithType:facebookAccountType
                                                options:@{
                                                         ACFacebookAppIdKey : _facebookAppID,
                                                         ACFacebookPermissionsKey : _facebookPermissions,
-                                                        ACFacebookAudienceKey : ACFacebookAudienceEveryone,
+                                                        ACFacebookAudienceKey : ACFacebookAudienceEveryone
                                                         }
                                             completion:completionHandler];
     } else {
@@ -234,52 +231,61 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 }
 
 - (void)openFacebookSession {
-    [_facebookSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
-                     completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                         switch (status) {
-                             case FBSessionStateClosed:
-                                 NSLog(@"STATUS: CLOSED");
-                                 break;
-                             case FBSessionStateClosedLoginFailed:
-                                 NSLog(@"STATUS: CLOSED LOGIN FAILED");
-                                 break;
-                             case FBSessionStateCreated:
-                                 NSLog(@"STATUS: CREATED");
-                                 break;
-                             case FBSessionStateCreatedOpening:
-                                 NSLog(@"STATUS: CREATED OPENING");
-                                 break;
-                             case FBSessionStateCreatedTokenLoaded:
-                                 NSLog(@"STATUS: CREATED TOKEN LOADING");
-                                 break;
-                             case FBSessionStateOpen:
-                                 NSLog(@"STATUS: OPEN");
-                                 break;
-                             case FBSessionStateOpenTokenExtended:
-                                 NSLog(@"STATUS: OPEN TOKEN EXTENDED");
-                                 break;
-                             default:
-                                 break;
-                         }
-                         NSLog(@">>> AUTH COMPLETE: %@ / %d / %@", session, status, error);
-                         if (_authHandler == nil) {
-                             NSLog(@"NO AUTH HANDLER: BAIL");
-                             return;
-                         }
-                         
-                         if (status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
-                             NSLog(@"STATUS WRONG: BAIL");
-                             [self completeAuthProcessWithAccount:nil
-                                                      profileInfo:nil
-                                                            error:HPAccountManagerErrorAuthenticationFailed];
-                             
-                             return;
-                         }
-                         
-                         [FBSession setActiveSession:_facebookSession];
-                         
-                         [self fetchDetailsForFacebookAccount];
-                     }];
+    BOOL authenticated = NO;
+    
+    authenticated = [FBSession openActiveSessionWithReadPermissions:_facebookPermissions
+                                                       allowLoginUI:YES
+                                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                                      switch (status) {
+                                                          case FBSessionStateClosed:
+                                                              NSLog(@"STATUS: CLOSED");
+                                                              break;
+                                                          case FBSessionStateClosedLoginFailed: {
+                                                              [FBSession.activeSession closeAndClearTokenInformation];
+                                                              NSLog(@"STATUS: CLOSED LOGIN FAILED");
+                                                              break;
+                                                          }
+                                                          case FBSessionStateCreated:
+                                                              NSLog(@"STATUS: CREATED");
+                                                              break;
+                                                          case FBSessionStateCreatedOpening:
+                                                              NSLog(@"STATUS: CREATED OPENING");
+                                                              break;
+                                                          case FBSessionStateCreatedTokenLoaded:
+                                                              NSLog(@"STATUS: CREATED TOKEN LOADING");
+                                                              break;
+                                                          case FBSessionStateOpen:
+                                                              NSLog(@"STATUS: OPEN");
+                                                              break;
+                                                          case FBSessionStateOpenTokenExtended:
+                                                              NSLog(@"STATUS: OPEN TOKEN EXTENDED");
+                                                              break;
+                                                          default:
+                                                              break;
+                                                      }
+                                                      NSLog(@">>> AUTH COMPLETE: %@ / %d / %@", session, status, error);
+                                                      if (_authHandler == nil) {
+                                                          NSLog(@"NO AUTH HANDLER: BAIL");
+                                                          return;
+                                                      }
+                                                      
+                                                      if (status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
+                                                          NSLog(@"STATUS WRONG: BAIL");
+                                                          [self completeAuthProcessWithAccount:nil
+                                                                                   profileInfo:nil
+                                                                                         error:HPAccountManagerErrorAuthenticationFailed];
+                                                          
+                                                          return;
+                                                      }
+                                                      
+                                                      //[FBSession setActiveSession:_facebookSession];
+                                                      
+                                                      [self fetchDetailsForFacebookAccount];
+                                                  }];
+    
+    if (authenticated) {
+        NSLog(@">>> AUTHENTICATED");
+    }
 }
 
 - (void)fetchDetailsForFacebookAccount {
@@ -555,17 +561,17 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 #pragma mark - URL handling
 
 - (BOOL)handleOpenURL:(NSURL *)url {
-    return [_facebookSession handleOpenURL:url];
+    return [[FBSession activeSession] handleOpenURL:url];
 }
 
 #pragma mark - Notifications
 
 - (void)didReceiveApplicationDidBecomeActiveNotification:(NSNotification *)notification {
-    [_facebookSession handleDidBecomeActive];
+    [[FBSession activeSession] handleDidBecomeActive];
 }
 
 - (void)didReceiveApplicationWillTerminateNotification:(NSNotification *)notification {
-    [_facebookSession close];
+    [[FBSession activeSession] close];
 }
 
 #pragma mark - Twitter Tokens
@@ -585,7 +591,7 @@ static NSString * const STAccountManagerTwitterUsernameKey = @"twitterUsername";
 #pragma mark - Facebook Token
 
 - (NSString *)facebookToken {
-    return _facebookSession.accessToken;
+    return [[FBSession activeSession] accessToken];
 }
 
 @end

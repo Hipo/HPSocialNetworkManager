@@ -29,7 +29,6 @@ typedef enum {
 
 @interface HPAccountManager : NSObject <UIActionSheetDelegate> {
 @private
-    FBSession *_facebookSession;
     TWAPIManager *_twitterManager;
 
     ACAccount *_twitterAccount;
