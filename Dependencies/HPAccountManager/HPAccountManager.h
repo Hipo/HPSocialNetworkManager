@@ -44,6 +44,7 @@ typedef enum {
 @property (nonatomic, readonly) NSString *twitterToken;
 @property (nonatomic, readonly) NSString *twitterTokenSecret;
 @property (nonatomic, readonly) NSString *facebookToken;
+@property (nonatomic, readonly, retain) ACAccount *twitterAccount;
 
 + (HPAccountManager *)sharedManager;
 
