@@ -10,7 +10,6 @@
 #import "NSData+Base64.h"
 
 #import "HPAccountManager.h"
-#import "HPAppDelegate.h"
 
 
 static NSString * const HPAccountManagerErrorDomain = @"com.hipo.HPSocialNetworkManager.authError";
@@ -404,9 +403,14 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
             [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
             [actionSheet setCancelButtonIndex:[systemTwitterAccounts count]];
             
-            HPAppDelegate *appDelegate = (HPAppDelegate *)[[UIApplication sharedApplication] delegate];
+            UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
             
-            [actionSheet showInView:appDelegate.window];
+            if (mainWindow.rootViewController != nil) {
+                [actionSheet showInView:mainWindow.rootViewController.view];
+            } else {
+                [actionSheet showInView:mainWindow];
+            }
+            
             [actionSheet release];
         };
         
