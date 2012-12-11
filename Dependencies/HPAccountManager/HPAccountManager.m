@@ -532,6 +532,10 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 - (void)completeAuthProcessWithAccount:(HPAccount *)account
                            profileInfo:(NSDictionary *)profileInfo
                                  error:(HPAccountManagerError)error {
+    if (_authHandler == nil) {
+        return;
+    }
+    
     dispatch_block_t completionBlock = ^{
         switch (error) {
             case HPAccountManagerErrorNone: {
