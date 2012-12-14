@@ -496,6 +496,8 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                                                    error:&parseError];
 
         if (parseError == nil) {
+            _twitterAccount = [twitterAccount retain];
+            
             HPAccount *account = [HPAccount accountWithType:HPAccountTypeTwitter
                                                  identifier:[userInfo valueForKey:@"id_str"]];
 
