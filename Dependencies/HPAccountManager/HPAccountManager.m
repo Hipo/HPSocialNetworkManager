@@ -604,17 +604,37 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 
 #pragma mark - Reset
 
-- (void)resetCachedTokens {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+- (void)removeAuthenticatedAccountOfType:(HPAccountType)accountType {
+    if (![self hasAuthenticatedAccountOfType:accountType]) {
+        return;
+    }
     
-    [prefs removeObjectForKey:HPAccountManagerTwitterTokenKey];
-    [prefs removeObjectForKey:HPAccountManagerTwitterSecretKey];
-    [prefs removeObjectForKey:HPAccountManagerTwitterUsernameKey];
-    [prefs synchronize];
-    
-    [[FBSession activeSession] closeAndClearTokenInformation];
-    
-    [_twitterAccount release], _twitterAccount = nil;
+    switch (accountType) {
+        case HPAccountTypeFacebook: {
+            [[FBSession activeSession] closeAndClearTokenInformation];
+
+            break;
+        }
+        case HPAccountTypeTwitter: {
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+            [prefs removeObjectForKey:HPAccountManagerTwitterTokenKey];
+            [prefs removeObjectForKey:HPAccountManagerTwitterSecretKey];
+            [prefs removeObjectForKey:HPAccountManagerTwitterUsernameKey];
+            [prefs synchronize];
+            
+            [_twitterAccount release], _twitterAccount = nil;
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)removeAllAuthenticatedAccounts {
+    [self removeAuthenticatedAccountOfType:HPAccountTypeFacebook];
+    [self removeAuthenticatedAccountOfType:HPAccountTypeTwitter];
 }
 
 @end
