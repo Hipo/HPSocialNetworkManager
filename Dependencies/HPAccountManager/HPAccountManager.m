@@ -58,6 +58,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     self = [super init];
     
     if (self) {
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveApplicationWillTerminateNotification:)
                                                      name:UIApplicationWillTerminateNotification
@@ -531,6 +532,9 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     }
     
     [self generateTokenForTwitterAccount:[systemTwitterAccounts objectAtIndex:buttonIndex]];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    [self.delegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
 }
 
 #pragma mark - Completion

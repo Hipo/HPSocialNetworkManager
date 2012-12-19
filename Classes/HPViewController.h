@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 Hipo. All rights reserved.
 //
 
+#import "HPAccountManager.h"
 
-@interface HPViewController : UIViewController
+@interface HPViewController : UIViewController <UIActionSheetDelegate, HPAccountManagerDelegate>
 
 @end

@@ -27,6 +27,9 @@ typedef enum {
 
 @class TWAPIManager;
 
+@protocol HPAccountManagerDelegate <UIActionSheetDelegate>
+@end
+
 @interface HPAccountManager : NSObject <UIActionSheetDelegate> {
 @private
     TWAPIManager *_twitterManager;
@@ -38,6 +41,7 @@ typedef enum {
     NSArray *_facebookPermissions;
     
     HPAccountAuthHandler _authHandler;
+    id <HPAccountManagerDelegate> _delegate;
 }
 
 @property (nonatomic, readonly) NSString *twitterUsername;
@@ -45,6 +49,7 @@ typedef enum {
 @property (nonatomic, readonly) NSString *twitterTokenSecret;
 @property (nonatomic, readonly) NSString *facebookToken;
 @property (nonatomic, readonly, retain) ACAccount *twitterAccount;
+@property (nonatomic , unsafe_unretained) id <HPAccountManagerDelegate> delegate;
 
 + (HPAccountManager *)sharedManager;
 

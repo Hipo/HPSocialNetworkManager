@@ -8,7 +8,6 @@
 
 #import "HPViewController.h"
 #import "HPAccount.h"
-#import "HPAccountManager.h"
 
 
 @interface HPViewController ()
@@ -20,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [HPAccountManager sharedManager].delegate = self;
 }
 
 - (IBAction)didTapTwitterLoginButton {
@@ -43,6 +42,10 @@
                                                             NSLog(@"%@", authenticatedAccount.identifier);
                                                         }
                                                     }];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    NSLog(@"Action sheet dismissed");
 }
 
 @end
