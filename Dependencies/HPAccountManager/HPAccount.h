@@ -27,7 +27,7 @@ typedef enum {
                     identifier:(NSString *)identifier;
 
 - (id)initWithAccountInfo:(NSDictionary *)accountInfo;
-- (id)initWithaccountType:(HPAccountType)accountType
+- (id)initWithAccountType:(HPAccountType)accountType
                identifier:(NSString *)identifier;
 
 - (NSDictionary *)pickledObjectForStorage;
