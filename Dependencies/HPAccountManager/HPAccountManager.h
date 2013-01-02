@@ -59,12 +59,12 @@ typedef enum {
          twitterConsumerSecret:(NSString *)twitterConsumerSecret;
 
 - (BOOL)hasAuthenticatedAccountOfType:(HPAccountType)accountType;
-- (void)removeAuthenticatedAccountOfType:(HPAccountType)accountType;
-- (void)removeAllAuthenticatedAccounts;
 
 - (void)authenticateAccountOfType:(HPAccountType)accountType
                       withHandler:(HPAccountAuthHandler)handler;
 
 - (BOOL)handleOpenURL:(NSURL *)url;
+
+- (void)resetCachedTokens;
 
 @end
