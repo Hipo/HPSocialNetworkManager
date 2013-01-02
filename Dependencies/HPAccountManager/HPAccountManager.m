@@ -228,51 +228,45 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 }
 
 - (void)openFacebookSession {
-    BOOL authenticated = NO;
-    
-    authenticated = [FBSession openActiveSessionWithReadPermissions:_facebookPermissions
-                                                       allowLoginUI:YES
-                                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                                                      switch (status) {
-                                                          case FBSessionStateClosed:
-                                                              break;
-                                                          case FBSessionStateClosedLoginFailed: {
-                                                              [FBSession.activeSession closeAndClearTokenInformation];
-                                                              break;
-                                                          }
-                                                          case FBSessionStateCreated:
-                                                              break;
-                                                          case FBSessionStateCreatedOpening:
-                                                              break;
-                                                          case FBSessionStateCreatedTokenLoaded:
-                                                              break;
-                                                          case FBSessionStateOpen:
-                                                              break;
-                                                          case FBSessionStateOpenTokenExtended:
-                                                              break;
-                                                          default:
-                                                              break;
-                                                      }
-
-                                                      if (_authHandler == nil) {
-                                                          return;
-                                                      }
-                                                      
-                                                      if (status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
-
-                                                          [self completeAuthProcessWithAccount:nil
-                                                                                   profileInfo:nil
-                                                                                         error:HPAccountManagerErrorAuthenticationFailed];
-                                                          
-                                                          return;
-                                                      }
-                                                      
-                                                      [self fetchDetailsForFacebookAccount];
-                                                  }];
-    
-    if (authenticated) {
-        [self fetchDetailsForFacebookAccount];
-    }
+    [FBSession openActiveSessionWithReadPermissions:_facebookPermissions
+                                       allowLoginUI:YES
+                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                      switch (status) {
+                                          case FBSessionStateClosed:
+                                              break;
+                                          case FBSessionStateClosedLoginFailed: {
+                                              [FBSession.activeSession closeAndClearTokenInformation];
+                                              break;
+                                          }
+                                          case FBSessionStateCreated:
+                                              break;
+                                          case FBSessionStateCreatedOpening:
+                                              break;
+                                          case FBSessionStateCreatedTokenLoaded:
+                                              break;
+                                          case FBSessionStateOpen:
+                                              break;
+                                          case FBSessionStateOpenTokenExtended:
+                                              break;
+                                          default:
+                                              break;
+                                      }
+                                      
+                                      if (_authHandler == nil) {
+                                          return;
+                                      }
+                                      
+                                      if (status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
+                                          
+                                          [self completeAuthProcessWithAccount:nil
+                                                                   profileInfo:nil
+                                                                         error:HPAccountManagerErrorAuthenticationFailed];
+                                          
+                                          return;
+                                      }
+                                      
+                                      [self fetchDetailsForFacebookAccount];
+                                  }];
 }
 
 - (void)fetchDetailsForFacebookAccount {
