@@ -21,6 +21,7 @@ HPSocialNetworkManager aims to ease the integration process by adding native
 support for all of these scenarios, and giving you a single interface that you 
 can use to authenticate a user with one or more social networks.
 
+
 Usage
 -----
 
@@ -46,6 +47,30 @@ contains the raw profile data received from Twitter or Facebook.
 
 You can see an example of this by checking out the example project in this repo.
 
+
+Installation
+------------
+
+Copy and include the `HPAccountManager` directory (found here under 
+Dependencies) in your own project. There are some other dependencies as well, 
+you can see their details below under Requirements.
+
+If your project uses ARC, you will have to mark the following files to be 
+compiled without ARC, using the `-fno-objc-arc` flag in build settings:
+
+* HPAccountManager.m
+* HPAccount.m
+* NSData+Base64.m
+* OAuth+Additions.m
+* OAuthCore.m
+
+On the other hand, if your project does not use ARC, you will have to mark the 
+following files to be compiled with ARC, using the `-fobj-arc` flag:
+
+* TWAPIManager.m
+* TWSignedRequest.m
+
+
 Requirements
 ------------
 
@@ -68,6 +93,7 @@ Required system frameworks are:
 If you find any issues, please open an issue here on GitHub, and feel free to 
 send in pull requests with improvements and fixes. You can also get in touch
 by emailing us at hello@hipo.biz.
+
 
 Credits
 -------
