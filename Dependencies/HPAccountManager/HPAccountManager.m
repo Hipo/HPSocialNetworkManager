@@ -184,7 +184,6 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 
 - (void)authenticateFacebookAccount {
     if ([[FBSession activeSession] isOpen] && [self hasAuthenticatedAccountOfType:HPAccountTypeFacebook]) {
-        NSLog(@">>> SESSION ALREADY OPEN");
         [self fetchDetailsForFacebookAccount];
         
         return;
@@ -192,9 +191,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     
     ACAccountStoreRequestAccessCompletionHandler completionHandler = ^(BOOL granted, NSError *error) {
         if (!granted || error != nil) {
-            NSLog(@"ACCESS REQUEST FAIL: %@", error);
             if ([error code] != ACErrorAccountNotFound) {
-                NSLog(@"BAIL");
                 [self completeAuthProcessWithAccount:nil
                                          profileInfo:nil
                                                error:HPAccountManagerErrorAuthenticationFailed];
@@ -238,39 +235,31 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                                                       switch (status) {
                                                           case FBSessionStateClosed:
-                                                              NSLog(@"STATUS: CLOSED");
                                                               break;
                                                           case FBSessionStateClosedLoginFailed: {
                                                               [FBSession.activeSession closeAndClearTokenInformation];
-                                                              NSLog(@"STATUS: CLOSED LOGIN FAILED");
                                                               break;
                                                           }
                                                           case FBSessionStateCreated:
-                                                              NSLog(@"STATUS: CREATED");
                                                               break;
                                                           case FBSessionStateCreatedOpening:
-                                                              NSLog(@"STATUS: CREATED OPENING");
                                                               break;
                                                           case FBSessionStateCreatedTokenLoaded:
-                                                              NSLog(@"STATUS: CREATED TOKEN LOADING");
                                                               break;
                                                           case FBSessionStateOpen:
-                                                              NSLog(@"STATUS: OPEN");
                                                               break;
                                                           case FBSessionStateOpenTokenExtended:
-                                                              NSLog(@"STATUS: OPEN TOKEN EXTENDED");
                                                               break;
                                                           default:
                                                               break;
                                                       }
-                                                      NSLog(@">>> AUTH COMPLETE: %@ / %d / %@", session, status, error);
+
                                                       if (_authHandler == nil) {
-                                                          NSLog(@"NO AUTH HANDLER: BAIL");
                                                           return;
                                                       }
                                                       
                                                       if (status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
-                                                          NSLog(@"STATUS WRONG: BAIL");
+
                                                           [self completeAuthProcessWithAccount:nil
                                                                                    profileInfo:nil
                                                                                          error:HPAccountManagerErrorAuthenticationFailed];
@@ -288,7 +277,6 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 
 - (void)fetchDetailsForFacebookAccount {
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        NSLog(@">>> ME RESPONSE: %@ / %@", result, error);
         if (result != nil && error == nil) {
             HPAccount *account = [HPAccount accountWithType:HPAccountTypeFacebook
                                                  identifier:[result valueForKey:@"id"]];
@@ -317,14 +305,13 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     
     ACAccountStoreRequestAccessCompletionHandler completionHandler = ^(BOOL granted, NSError *error) {
         if (!granted || error != nil) {
-            NSLog(@"ACCESS REQUEST FAIL: %@", error);
             [self completeAuthProcessWithAccount:nil
                                      profileInfo:nil
                                            error:HPAccountManagerErrorAuthenticationFailed];
             
             return;
         }
-        NSLog(@">>> CHECKING: %@", self.twitterUsername);
+
         dispatch_block_t completionBlock = ^{
             [self checkSystemTwitterAccountsAgainstUsername:self.twitterUsername];
         };
@@ -351,7 +338,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                          ACAccountTypeIdentifierTwitter];
     
     NSArray *systemTwitterAccounts = [_accountStore accountsWithAccountType:twitterAccountType];
-    NSLog(@">>> SYSTEM ACCOUNTS: %@", systemTwitterAccounts);
+
     if (systemTwitterAccounts == nil || [systemTwitterAccounts count] == 0) {
         if (_authHandler != nil) {
             [self completeAuthProcessWithAccount:nil
@@ -363,9 +350,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     }
     
     if (username != nil) {
-        NSLog(@">>> LOOKING FOR %@", username);
         for (ACAccount *systemTwitterAccount in systemTwitterAccounts) {
-            NSLog(@">>> CHECKING ACCOUNT: %@", systemTwitterAccount);
             if (systemTwitterAccount.username != nil) {
                 if ([username isEqualToString:systemTwitterAccount.username]) {
                     _twitterAccount = [systemTwitterAccount retain];
@@ -424,11 +409,9 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 }
 
 - (void)generateTokenForTwitterAccount:(ACAccount *)twitterAccount {
-    NSLog(@">>> GENERATING TOKEN FOR TWITTER ACCOUNT: %@", twitterAccount.username);
     [_twitterManager performReverseAuthForAccount:twitterAccount
                                       withHandler:^(NSData *responseData, NSError *error) {
                                           if (error != nil) {
-                                              NSLog(@"FAILED: %@", error);
                                               [self completeAuthProcessWithAccount:nil
                                                                        profileInfo:nil
                                                                              error:HPAccountManagerErrorAuthenticationFailed];
@@ -439,7 +422,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                           NSString *response = [[NSString alloc]
                                                                 initWithData:responseData
                                                                 encoding:NSUTF8StringEncoding];
-                                          NSLog(@"RESPONSE: %@", response);
+
                                           NSArray *components = [response componentsSeparatedByString:@"&"];
                                           NSString *token = nil;
                                           NSString *tokenSecret = nil;
@@ -457,7 +440,6 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                           [response release];
                                           
                                           if (token == nil || tokenSecret == nil) {
-                                              NSLog(@">>> TOKEN NOT FOUND, BAIL");
                                               [self completeAuthProcessWithAccount:nil
                                                                        profileInfo:nil
                                                                              error:HPAccountManagerErrorAuthenticationFailed];
@@ -466,7 +448,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                           }
                                           
                                           NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-                                          NSLog(@">>> STORING TOKEN: %@ / SECRET: %@ / USERNAME: %@", token, tokenSecret, twitterAccount.username);
+
                                           [prefs setObject:token forKey:HPAccountManagerTwitterTokenKey];
                                           [prefs setObject:tokenSecret forKey:HPAccountManagerTwitterSecretKey];
                                           [prefs setObject:twitterAccount.username forKey:HPAccountManagerTwitterUsernameKey];

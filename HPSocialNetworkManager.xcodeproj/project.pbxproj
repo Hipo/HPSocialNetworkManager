@@ -14,6 +14,21 @@
 		75B287A1166CD50500E2C3F1 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A0166CD50500E2C3F1 /* Twitter.framework */; };
 		75B287A3166CD50A00E2C3F1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A2166CD50900E2C3F1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		75B287A9166CD55200E2C3F1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B287A8166CD55200E2C3F1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EC0C99E116942AAF00433517 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99CF16942AAF00433517 /* Default-568h@2x.png */; };
+		EC0C99E216942AAF00433517 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D016942AAF00433517 /* Default.png */; };
+		EC0C99E316942AAF00433517 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D116942AAF00433517 /* Default@2x.png */; };
+		EC0C99E416942AAF00433517 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D216942AAF00433517 /* Icon-72.png */; };
+		EC0C99E516942AAF00433517 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D316942AAF00433517 /* Icon-72@2x.png */; };
+		EC0C99E616942AAF00433517 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D416942AAF00433517 /* Icon-Small-50.png */; };
+		EC0C99E716942AAF00433517 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D516942AAF00433517 /* Icon-Small-50@2x.png */; };
+		EC0C99E816942AAF00433517 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D616942AAF00433517 /* Icon-Small.png */; };
+		EC0C99E916942AAF00433517 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D716942AAF00433517 /* Icon-Small@2x.png */; };
+		EC0C99EA16942AAF00433517 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D816942AAF00433517 /* Icon.png */; };
+		EC0C99EB16942AAF00433517 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99D916942AAF00433517 /* Icon@2x.png */; };
+		EC0C99EC16942AAF00433517 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99DA16942AAF00433517 /* iTunesArtwork.png */; };
+		EC0C99ED16942AAF00433517 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99DB16942AAF00433517 /* iTunesArtwork@2x.png */; };
+		EC0C99EE16942AAF00433517 /* HPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99DD16942AAF00433517 /* HPViewController.xib */; };
+		EC0C99EF16942AAF00433517 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC0C99DF16942AAF00433517 /* InfoPlist.strings */; };
 		ECD5DCF31674CA4000E30206 /* HPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DCD01674CA4000E30206 /* HPAppDelegate.m */; };
 		ECD5DCF41674CA4000E30206 /* HPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DCD21674CA4000E30206 /* HPViewController.m */; };
 		ECD5DCF51674CA4000E30206 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5DCD41674CA4000E30206 /* FacebookSDK.framework */; };
@@ -21,11 +36,6 @@
 		ECD5DCF71674CA4100E30206 /* HPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DCD91674CA4000E30206 /* HPAccountManager.m */; };
 		ECD5DCFB1674CA4100E30206 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DCE31674CA4000E30206 /* TWAPIManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		ECD5DCFC1674CA4100E30206 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DCE51674CA4000E30206 /* TWSignedRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		ECD5DCFE1674CA4100E30206 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECD5DCE81674CA4000E30206 /* Default-568h@2x.png */; };
-		ECD5DCFF1674CA4100E30206 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ECD5DCE91674CA4000E30206 /* Default.png */; };
-		ECD5DD001674CA4100E30206 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECD5DCEA1674CA4000E30206 /* Default@2x.png */; };
-		ECD5DD011674CA4100E30206 /* HPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECD5DCEB1674CA4000E30206 /* HPViewController.xib */; };
-		ECD5DD021674CA4100E30206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECD5DCED1674CA4000E30206 /* InfoPlist.strings */; };
 		ECD5DD041674CA4100E30206 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DCF21674CA4000E30206 /* main.m */; };
 		ECD5DD0F1674DC6300E30206 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5DD0E1674DC6200E30206 /* libsqlite3.dylib */; };
 		ECD5DD171674DE7C00E30206 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5DD121674DE7C00E30206 /* NSData+Base64.m */; };
@@ -42,6 +52,21 @@
 		75B287A0166CD50500E2C3F1 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		75B287A2166CD50900E2C3F1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		75B287A8166CD55200E2C3F1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		EC0C99CF16942AAF00433517 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		EC0C99D016942AAF00433517 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EC0C99D116942AAF00433517 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		EC0C99D216942AAF00433517 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		EC0C99D316942AAF00433517 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		EC0C99D416942AAF00433517 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		EC0C99D516942AAF00433517 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		EC0C99D616942AAF00433517 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		EC0C99D716942AAF00433517 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		EC0C99D816942AAF00433517 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		EC0C99D916942AAF00433517 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		EC0C99DA16942AAF00433517 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		EC0C99DB16942AAF00433517 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		EC0C99DD16942AAF00433517 /* HPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HPViewController.xib; sourceTree = "<group>"; };
+		EC0C99E016942AAF00433517 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ECD5DCCF1674CA4000E30206 /* HPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPAppDelegate.h; sourceTree = "<group>"; };
 		ECD5DCD01674CA4000E30206 /* HPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPAppDelegate.m; sourceTree = "<group>"; };
 		ECD5DCD11674CA4000E30206 /* HPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPViewController.h; sourceTree = "<group>"; };
@@ -55,11 +80,6 @@
 		ECD5DCE31674CA4000E30206 /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
 		ECD5DCE41674CA4000E30206 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
 		ECD5DCE51674CA4000E30206 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
-		ECD5DCE81674CA4000E30206 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		ECD5DCE91674CA4000E30206 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		ECD5DCEA1674CA4000E30206 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		ECD5DCEC1674CA4000E30206 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HPViewController.xib; sourceTree = "<group>"; };
-		ECD5DCEE1674CA4000E30206 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ECD5DCF01674CA4000E30206 /* HPSocialNetworkManager-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HPSocialNetworkManager-Info.plist"; sourceTree = "<group>"; };
 		ECD5DCF11674CA4000E30206 /* HPSocialNetworkManager-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HPSocialNetworkManager-Prefix.pch"; sourceTree = "<group>"; };
 		ECD5DCF21674CA4000E30206 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -127,6 +147,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC0C99CE16942AAF00433517 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EC0C99CF16942AAF00433517 /* Default-568h@2x.png */,
+				EC0C99D016942AAF00433517 /* Default.png */,
+				EC0C99D116942AAF00433517 /* Default@2x.png */,
+				EC0C99D216942AAF00433517 /* Icon-72.png */,
+				EC0C99D316942AAF00433517 /* Icon-72@2x.png */,
+				EC0C99D416942AAF00433517 /* Icon-Small-50.png */,
+				EC0C99D516942AAF00433517 /* Icon-Small-50@2x.png */,
+				EC0C99D616942AAF00433517 /* Icon-Small.png */,
+				EC0C99D716942AAF00433517 /* Icon-Small@2x.png */,
+				EC0C99D816942AAF00433517 /* Icon.png */,
+				EC0C99D916942AAF00433517 /* Icon@2x.png */,
+				EC0C99DA16942AAF00433517 /* iTunesArtwork.png */,
+				EC0C99DB16942AAF00433517 /* iTunesArtwork@2x.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		EC0C99DC16942AAF00433517 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				EC0C99DD16942AAF00433517 /* HPViewController.xib */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		EC0C99DE16942AAF00433517 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				EC0C99DF16942AAF00433517 /* InfoPlist.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		ECD5DCCE1674CA4000E30206 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,11 +230,9 @@
 		ECD5DCE71674CA4000E30206 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ECD5DCE81674CA4000E30206 /* Default-568h@2x.png */,
-				ECD5DCE91674CA4000E30206 /* Default.png */,
-				ECD5DCEA1674CA4000E30206 /* Default@2x.png */,
-				ECD5DCEB1674CA4000E30206 /* HPViewController.xib */,
-				ECD5DCED1674CA4000E30206 /* InfoPlist.strings */,
+				EC0C99CE16942AAF00433517 /* Icons */,
+				EC0C99DC16942AAF00433517 /* Interface */,
+				EC0C99DE16942AAF00433517 /* Localization */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -258,11 +312,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECD5DCFE1674CA4100E30206 /* Default-568h@2x.png in Resources */,
-				ECD5DCFF1674CA4100E30206 /* Default.png in Resources */,
-				ECD5DD001674CA4100E30206 /* Default@2x.png in Resources */,
-				ECD5DD011674CA4100E30206 /* HPViewController.xib in Resources */,
-				ECD5DD021674CA4100E30206 /* InfoPlist.strings in Resources */,
+				EC0C99E116942AAF00433517 /* Default-568h@2x.png in Resources */,
+				EC0C99E216942AAF00433517 /* Default.png in Resources */,
+				EC0C99E316942AAF00433517 /* Default@2x.png in Resources */,
+				EC0C99E416942AAF00433517 /* Icon-72.png in Resources */,
+				EC0C99E516942AAF00433517 /* Icon-72@2x.png in Resources */,
+				EC0C99E616942AAF00433517 /* Icon-Small-50.png in Resources */,
+				EC0C99E716942AAF00433517 /* Icon-Small-50@2x.png in Resources */,
+				EC0C99E816942AAF00433517 /* Icon-Small.png in Resources */,
+				EC0C99E916942AAF00433517 /* Icon-Small@2x.png in Resources */,
+				EC0C99EA16942AAF00433517 /* Icon.png in Resources */,
+				EC0C99EB16942AAF00433517 /* Icon@2x.png in Resources */,
+				EC0C99EC16942AAF00433517 /* iTunesArtwork.png in Resources */,
+				EC0C99ED16942AAF00433517 /* iTunesArtwork@2x.png in Resources */,
+				EC0C99EE16942AAF00433517 /* HPViewController.xib in Resources */,
+				EC0C99EF16942AAF00433517 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,18 +353,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ECD5DCEB1674CA4000E30206 /* HPViewController.xib */ = {
+		EC0C99DF16942AAF00433517 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				ECD5DCEC1674CA4000E30206 /* en */,
-			);
-			name = HPViewController.xib;
-			sourceTree = "<group>";
-		};
-		ECD5DCED1674CA4000E30206 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECD5DCEE1674CA4000E30206 /* en */,
+				EC0C99E016942AAF00433517 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
