@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #                   * Markdown format.
   #                   * Don't worry about the indent, we strip it!
   #                  DESC
-  s.homepage     = "http://EXAMPLE/HPSocialNetworkManager"
+  s.homepage     = "https://github.com/Hipo/HPSocialNetworkManager"
 
   # Specify the license type. CocoaPods detects automatically the license file if it is named
   # `LICEN{C,S}E*.*', however if the name is different, specify it.
@@ -40,8 +40,8 @@ Pod::Spec.new do |s|
   # Specify the authors of the library, with email addresses. You can often find
   # the email addresses of the authors by using the SCM log. E.g. $ git log
   #
-  s.author       = { "" => "" }
-  # s.authors      = { "" => "", "other author" => "and email address" }
+  #s.author       = { "" => "" }
+  s.authors      = { "Taylan Pince" => "taylan@hipo.biz", "Sarp Erdag" => "sarp.erdag@gmail.com" }
   #
   # If absolutely no email addresses are available, then you can use this form instead.
   #
