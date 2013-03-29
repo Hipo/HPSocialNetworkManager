@@ -39,6 +39,7 @@ typedef enum {
     
     NSString *_facebookAppID;
     NSArray *_facebookPermissions;
+    NSString *_facebookSchemeSuffix;
     
     HPAccountAuthHandler _authHandler;
     id <HPAccountManagerDelegate> _delegate;
@@ -48,6 +49,7 @@ typedef enum {
 @property (nonatomic, readonly) NSString *twitterToken;
 @property (nonatomic, readonly) NSString *twitterTokenSecret;
 @property (nonatomic, readonly) NSString *facebookToken;
+@property (nonatomic, readonly) NSString *facebookSchemeSuffix;
 @property (nonatomic, readonly, retain) ACAccount *twitterAccount;
 @property (nonatomic , unsafe_unretained) id <HPAccountManagerDelegate> delegate;
 
@@ -55,6 +57,7 @@ typedef enum {
 
 - (void)setupWithFacebookAppID:(NSString *)facebookAppID
         facebookAppPermissions:(NSArray *)facebookAppPermissions
+          facebookSchemeSuffix:(NSString *)facebookSchemeSuffix
             twitterConsumerKey:(NSString *)twitterConsumerKey
          twitterConsumerSecret:(NSString *)twitterConsumerSecret;
 

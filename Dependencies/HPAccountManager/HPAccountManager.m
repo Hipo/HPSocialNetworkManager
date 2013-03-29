@@ -82,16 +82,20 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     [_twitterManager release], _twitterManager = nil;
     [_facebookAppID release], _facebookAppID = nil;
     [_facebookPermissions release], _facebookPermissions = nil;
+    [_facebookSchemeSuffix release], _facebookSchemeSuffix = nil;
     
     [super dealloc];
 }
 
 #pragma mark - Setup
 
+
 - (void)setupWithFacebookAppID:(NSString *)facebookAppID
         facebookAppPermissions:(NSArray *)facebookAppPermissions
+          facebookSchemeSuffix:(NSString *)facebookSchemeSuffix
             twitterConsumerKey:(NSString *)twitterConsumerKey
          twitterConsumerSecret:(NSString *)twitterConsumerSecret {
+
     
     if (_facebookAppID != nil || _twitterManager != nil) {
         return;
@@ -99,6 +103,7 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
     
     _facebookAppID = [facebookAppID copy];
     _facebookPermissions = [facebookAppPermissions copy];
+    _facebookSchemeSuffix = [facebookSchemeSuffix copy];
     
     [FBSession setDefaultAppID:_facebookAppID];
     
@@ -228,9 +233,15 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
 }
 
 - (void)openFacebookSession {
-    [FBSession openActiveSessionWithReadPermissions:_facebookPermissions
-                                       allowLoginUI:YES
-                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+    FBSession *session = [[[FBSession alloc] initWithAppID:_facebookAppID
+                                              permissions:_facebookPermissions
+                                          defaultAudience:FBSessionDefaultAudienceEveryone
+                                          urlSchemeSuffix:_facebookSchemeSuffix
+                                       tokenCacheStrategy:nil] autorelease];
+    
+    [FBSession setActiveSession:session];
+    
+    [[FBSession activeSession] openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                                       switch (status) {
                                           case FBSessionStateClosed:
                                               break;
@@ -251,22 +262,22 @@ static NSString * const HPAccountManagerTwitterUsernameKey = @"twitterUsername";
                                           default:
                                               break;
                                       }
-                                      
+
                                       if (_authHandler == nil) {
                                           return;
                                       }
-                                      
+
                                       if (status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
-                                          
+
                                           [self completeAuthProcessWithAccount:nil
                                                                    profileInfo:nil
                                                                          error:HPAccountManagerErrorAuthenticationFailed];
-                                          
+
                                           return;
                                       }
                                       
                                       [self fetchDetailsForFacebookAccount];
-                                  }];
+    }];
 }
 
 - (void)fetchDetailsForFacebookAccount {
