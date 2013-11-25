@@ -21,6 +21,7 @@ static NSString * const HPTwitterConsumerSecret = @"pzxUp9Kh9nph0VnoJBzaZh7oo2sc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[HPAccountManager sharedManager] setupWithFacebookAppID:HPFacebookAppID
                                       facebookAppPermissions:@[@"email", @"user_location", @"user_about_me"]
+                                        facebookSchemeSuffix:@""
                                           twitterConsumerKey:HPTwitterConsumerKey
                                        twitterConsumerSecret:HPTwitterConsumerSecret];
     
