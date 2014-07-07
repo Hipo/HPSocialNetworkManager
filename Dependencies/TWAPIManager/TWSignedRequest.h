@@ -26,13 +26,11 @@
 
 #import <Foundation/Foundation.h>
 
-enum TWSignedRequestMethod {
+typedef NS_ENUM(NSInteger, TWSignedRequestMethod) {
     TWSignedRequestMethodGET,
     TWSignedRequestMethodPOST,
     TWSignedRequestMethodDELETE
 };
-
-typedef enum TWSignedRequestMethod TWSignedRequestMethod;
 
 typedef
 void(^TWSignedRequestHandler)

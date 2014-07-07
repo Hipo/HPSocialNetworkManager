@@ -40,7 +40,7 @@
     return self;
 }
 
-- (id)initWithaccountType:(HPAccountType)accountType
+- (id)initWithAccountType:(HPAccountType)accountType
                identifier:(NSString *)identifier {
     self = [super init];
     
